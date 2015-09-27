@@ -88,11 +88,11 @@ else if($ft=='png')
 
 imagedestroy($res);
 
+
 function isBase64($data)
 {
-	if ( base64_encode(base64_decode($data, true)) === $data){
-    return true;
-	} else {
+	if ( base64_encode(base64_decode($data, true)) === $data)
+		return true;
+	else 
 		return false;
-	}
 }
