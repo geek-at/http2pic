@@ -125,7 +125,9 @@ define('CONN', (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "")?'http':'ht
             </div>
             <div class="6u">
                 <section>
-                    <h2>Example PHP script</h2>
+                    <h1>Examples</h1>
+                    
+                    <h3>Simple link via img tag</h3>
                     <p class="margin-bottom"></p>
                     <p>
                         <pre><code class="php">
@@ -135,6 +137,26 @@ define('CONN', (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "")?'http':'ht
     $img="<?php echo CONN; ?>://<?php echo DOMAIN; ?>/api.php?$query";
 
     echo "&lt;img src='$img' /&gt;";
+?&gt;
+                        </code></pre>
+                    </p>
+                    
+                    
+                    <h3>Proxy script to download the image via curl</h3>
+                    <p class="margin-bottom"></p>
+                    <p>
+                        <pre><code class="php">
+&lt;?php
+    $targeturl = 'http://www.xkcd.com';
+    $url = '<?php echo CONN; ?>://<?php echo DOMAIN; ?>/api.php?url='.rawurlencode($targeturl);
+	    
+    $ch = curl_init($url);
+    $fp = fopen('xkcd.jpg', 'wb');
+    curl_setopt($ch, CURLOPT_FILE, $fp);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_exec($ch);
+    curl_close($ch);
+    fclose($fp);
 ?&gt;
                         </code></pre>
                     </p>
