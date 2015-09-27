@@ -16,6 +16,7 @@ Live demo on https://http2pic.haschek.at/
 - Make sure the server has the "timeout" command. For debian this is available via ```apt-get install coreutils```
 - Download this repo and extract it somewhere on your webserver
 
+---
 
 This is a [HASCHEK SOLUTIONS](https://haschek.solutions) project
 
