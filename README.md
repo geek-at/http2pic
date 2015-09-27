@@ -15,3 +15,7 @@ Live demo on https://http2pic.haschek.at/
 - Make /usr/sbin/wkhtmltoimage executable for the user that runs the webserver. For Apache it's the ```www-data``` user. Or use sudo
 - Make sure the server has the "timeout" command. For debian this is available via ```apt-get install coreutils```
 - Download this repo and extract it somewhere on your webserver
+
+
+Copyright by HASCHEK SOLUTIONS
+![HS logo](https://http2pic.haschek.at/img/hs_logo.png)
