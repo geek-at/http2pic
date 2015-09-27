@@ -17,5 +17,6 @@ Live demo on https://http2pic.haschek.at/
 - Download this repo and extract it somewhere on your webserver
 
 
-Copyright by HASCHEK SOLUTIONS
-![HS logo](https://http2pic.haschek.at/img/hs_logo.png)
+This is a [HASCHEK SOLUTIONS](https://haschek.solutions) project
+
+[![HS logo](https://http2pic.haschek.at/img/hs_logo.png)](https://haschek.solutions)
