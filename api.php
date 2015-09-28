@@ -12,7 +12,7 @@ $url = rawurldecode($_GET['url']);
 if(isBase64($url))
 	$url = base64_decode($url);
 
-if(!$timeout)
+if(!$timeout || !is_numeric($timeout) || ($timeout>30 || $timeout<1))
 	$timeout = 10;
 
 if($viewport)
@@ -52,7 +52,7 @@ $hash = $cache.'-'.preg_replace("/[^A-Za-z0-9 ]/", '', $url).'.'.$ft;
 
 $file = __DIR__.'/cache/'.$hash;
 if(!file_exists($file))
-	shell_exec('timeout '.$timeout.' /usr/sbin/wkhtmltoimage '.$vp.$jsp.'-f '.$ft.' '.$url.' '.$file);
+	shell_exec('timeout '.$timeout.' /usr/sbin/wkhtmltoimage '.escapeshellcmd($vp.$jsp.'-f '.$ft.' '.$url.' '.$file));
 
 if(filesize($file)==0 && $onfail)
 	@file_put_contents($file, file_get_contents($onfail));
