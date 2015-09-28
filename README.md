@@ -16,6 +16,22 @@ Live demo on https://http2pic.haschek.at/
 - Make sure the server has the "timeout" command. For debian this is available via ```apt-get install coreutils```
 - Download this repo and extract it somewhere on your webserver
 
+## Usage
+
+After you extracted the contents of this repo to your webserver and can access the page and it will tell you how to use the API.
+
+But it's as simple as:
+
+```
+https://your-url-and.path/api.php?[OPTIONS]&url=[WEBSITE_URL]
+```
+
+The requested page will render as image (not provide a link). So you can use the path to your api.php file like so:
+
+```
+<img src="https://your-url-and.path/api.php?url=http://xkcd.com" title="screenshot of xkcd.com" />
+```
+
 ---
 
 This is a [HASCHEK SOLUTIONS](https://haschek.solutions) project
