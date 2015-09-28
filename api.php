@@ -49,7 +49,8 @@ if(!$cache)
 	$cache = md5(time().rand(1,2000));
 $hash = $cache.'-'.preg_replace("/[^A-Za-z0-9 ]/", '', $url).'.'.$ft;
 
-
+if(!is_dir(__DIR__.'/cache/'))
+	mkdir(__DIR__.'/cache/');
 $file = __DIR__.'/cache/'.$hash;
 if(!file_exists($file))
 	shell_exec('timeout '.$timeout.' /usr/sbin/wkhtmltoimage '.escapeshellcmd($vp.$jsp.'-f '.$ft.' '.$url.' '.$file));
