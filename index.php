@@ -65,7 +65,7 @@ define('CONN', (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "")?'http':'ht
                         <h2 id="loading"><img src="img/loading.gif" /><br/>Loading..</h2>
                         <hr class="small">
                         <span style="text-shadow: 0px 0px 12px #000000;" class="subheading">Give it a try! <input id="showcase_url" type="url" placeholder="eg. http://xkcd.com" />
-                        <input id="showcase_button" type="button" onclick="web2pic();" value="GO" /></div>
+                        <input id="showcase_button" type="button" value="GO" /></div>
                     </div>
                 </div>
             </div>
