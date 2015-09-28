@@ -14,7 +14,7 @@ Live demo on https://http2pic.haschek.at/
 - Install [wkhtmltox](http://wkhtmltopdf.org/downloads.html) on your server
 - Make /usr/sbin/wkhtmltoimage executable for the user that runs the webserver. For Apache it's the ```www-data``` user. Or use sudo
 - Make sure the server has the "timeout" command. For debian this is available via ```apt-get install coreutils```
-- Download this repo and extract it somewhere on your webserver
+- Download [this repo](https://github.com/chrisiaut/http2pic/archive/master.zip) and extract it somewhere on your webserver
 
 ## Usage
 
