@@ -16,19 +16,19 @@ if (isBase64($url)) {
 	$url = base64_decode($url);
 }
 
-if (!$timeout || !is_numeric($timeout) || ($timeout>30 || $timeout<1)) {
+if (!$timeout || !is_numeric($timeout) || ($timeout > 30 || $timeout < 1)) {
 	$timeout = 10;
 }
 
 if ($viewport) {
 	$a = explode('x', $viewport);
-	$width = $a[0];
-	$height = $a[1];
-	if ($width) {
-		$vp = "--width $width ";
+	$w = $a[0];
+	$h = $a[1];
+	if ($w) {
+		$vp = "--width $w ";
 	}
-	if ($height) {
-		$vp.= "--height $height ";
+	if ($h) {
+		$vp .= "--height $h ";
 	}
 }	
 
@@ -48,8 +48,6 @@ switch ($type) {
 		header('Content-Type: image/jpeg');
 }
 
-
-
 $hash = $cache.'-'.preg_replace("/[^A-Za-z0-9 ]/", '', $url).'.'.$fileType;
 
 if (!$cache) {
@@ -66,14 +64,14 @@ if (!file_exists($file)) {
 	shell_exec('timeout '.$timeout.' /usr/sbin/wkhtmltoimage '.escapeshellcmd($vp.$jsp.'-f '.$fileType.' '.$url.' '.$file));
 }
 
-if (filesize($file)==0 && $onfail) {
+if (filesize($file) == 0 && $onfail) {
 	@file_put_contents($file, file_get_contents($onfail));
 }
 
 if ($resizewidth) {
 	list($width_orig, $height_orig) = getimagesize($file);
 
-	if ($width_orig!=$resizewidth) {
+	if ($width_orig != $resizewidth) {
 		$ratio_orig = $width_orig/$height_orig;
 		$height = $resizewidth/$ratio_orig;
 
@@ -87,25 +85,24 @@ if ($resizewidth) {
 
 
 if ($fileType === 'jpg') {
-	$res = imagecreatefromjpeg($file);
-	imagejpeg($res,NULL,100);
+	$result = imagecreatefromjpeg($file);
+	imagejpeg($result, NULL, 100);
 }
-else if ($fileType ==='png') {
-	$res = imagecreatefrompng($file);
-	imagepng($res,NULL,9);
+else if ($fileType === 'png') {
+	$result = imagecreatefrompng($file);
+	imagepng($result, NULL, 9);
 }
 
 
-imagedestroy($res);
+imagedestroy($result);
 
 if (!$cache) {
 	unlink($file);
 }
 
 function isBase64($data) {
-	if ( base64_encode(base64_decode($data, true)) === $data) {
+	if (base64_encode(base64_decode($data, true)) === $data) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
