@@ -14,6 +14,18 @@ define('CONN', (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "")?'http':'ht
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Christian Haschek">
+    
+    <!-- Open Graph data -->
+    <meta property="og:title" content="HTTP2PIC | Website screenshot API" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="<?php echo CONN; ?>://<?php echo DOMAIN; ?>" />
+    <meta property="og:image" content="<?php echo CONN; ?>://<?php echo DOMAIN; ?>/api.php?url=<?php echo rawurlencode(CONN.'://'.DOMAIN); ?>&cache=1&viewport=1200x630"/>
+    <meta property="og:description" content="An open source website renderer" /> 
+    <meta property="og:site_name" content="http2pic" />
+    <meta property="article:published_time" content="2015-09-28 00:14:58" />
+    <meta property="article:modified_time" content="2015-09-28 22:08:16" />
+    <meta property="article:tag" content="selfhosted,opensource,screenshot" />
+
 
     <title>http2pic</title>
 
