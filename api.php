@@ -45,7 +45,9 @@ switch ($type) {
 
 
 
-$hash = 'c'.$cache.'-'.preg_replace("/[^A-Za-z0-9 ]/", '', $url).'.'.$ft;
+$hash = $cache.'-'.preg_replace("/[^A-Za-z0-9 ]/", '', $url).'.'.$ft;
+if(!$cache)
+	$hash = md5(time().rand(1,2000)).$hash;
 
 if(!is_dir(__DIR__.'/cache/'))
 	mkdir(__DIR__.'/cache/');
@@ -89,7 +91,6 @@ imagedestroy($res);
 
 if(!$cache)
 	unlink($file);
-
 
 function isBase64($data)
 {
