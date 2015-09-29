@@ -26,7 +26,7 @@ define(RENDERINGENGINE,'wkhtmltoimage');
 define(WKHTMLTOIMAGEPATH,'/usr/sbin/wkhtmltoimage');
 
 //location of phantomJS
-define(PHANTOMJSPATH,'/usr/sbin/phantomjs');
+define(PHANTOMJSPATH,'/usr/bin/phantomjs');
 
 //where shoud we store cached images
 define(CACHEDIR,__DIR__.'/cache/');
@@ -123,10 +123,41 @@ class http2pic
 	
 	function render()
 	{
-		if(RENDERINGENGINE=='wkhtmltoimage')
+		//if phantomjs is selected and installed
+		if(RENDERINGENGINE=='phantomjs' && file_exists(PHANTOMJSPATH))
+			return $this->renderPagePHANTOMJS();
+		
+		//no? well ok how about WKHTMLToImage?
+		else if(RENDERINGENGINE=='wkhtmltoimage' && file_exists(WKHTMLTOIMAGEPATH))
 			return $this->renderPageWKHTMLTOIMAGE();
+			
+		//you're fucked
 		else
-			throw new Exception('Not implemented yet');
+			throw new Exception('No valid rendering engine found');
+	}
+	
+	
+	/**
+	* Render using PhantomJS
+	**/
+	function renderPagePHANTOMJS()
+	{
+		$cmd = 'timeout '.$this->params['timeout'].' '.PHANTOMJSPATH;
+		$cmd.= ' '.__DIR__.'/phantom.js ';
+		
+		$cmd.= ($this->params['url']);
+		$cmd.= ','.($this->params['file']);
+		$cmd.= ','.$this->params['vp_w'];
+		$cmd.= ','.$this->params['vp_h'];
+		$cmd.= ','.$this->params['js'];
+		
+		$cmd = escapeshellcmd($cmd);
+		exit($cmd);
+		shell_exec($cmd);
+		$this->params['cmd'] = $cmd;
+		
+		$this->postRender();
+		return $cmd;
 	}
 	
 	/**
