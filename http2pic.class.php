@@ -159,11 +159,6 @@ class http2pic
 		//add storage path to cmd
 		$cmd.=' '.escapeshellarg($this->params['file']);
 			
-		
-		
-		
-		//.$this->params['vp'].$this->params['jsp'].'-f '.$this->params['fileType'].' '.$this->params['url'].' '.$this->params['file'];
-		
 		$cmd = escapeshellcmd($cmd);
 		shell_exec($cmd);
 		$this->params['cmd'] = $cmd;
@@ -214,9 +209,16 @@ class http2pic
 	
 			// resample
 			$image_p = imagecreatetruecolor($this->params['resizewidth'], $height);
-			$image = imagecreatefromjpeg($file);
+			if ($this->params['type'] === 'png')
+				$image = imagecreatefrompng($file);
+			else
+				$image = imagecreatefromjpeg($file);
 			imagecopyresampled($image_p, $image, 0, 0, 0, 0, $this->params['resizewidth'], $height, $width_orig, $height_orig);
-			imagejpeg($image_p, $file, 100);
+			
+			if ($this->params['type'] === 'png')
+				imagepng($image_p, $file, 9);
+			else
+				imagejpeg($image_p, $file, 100);
 		}
 	}
 	
