@@ -17,6 +17,10 @@ Live demo on https://http2pic.haschek.at/
 - Make sure the server has the "timeout" command. For debian this is available via ```apt-get install coreutils```
 - Download [this repo](https://github.com/chrisiaut/http2pic/archive/master.zip) and extract it somewhere on your webserver
 
+## Upgrade
+
+Whenever you come to this page you can just [download](https://github.com/chrisiaut/http2pic/archive/master.zip) the repo again and overwrite the existing files. Should work out of the box
+
 ## Usage
 
 After you extracted the contents of this repo to your webserver and can access the page and it will tell you how to use the API.
