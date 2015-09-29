@@ -8,6 +8,7 @@ Live demo on https://http2pic.haschek.at/
 ## Dependencies
 - [wkhtmltox](http://wkhtmltopdf.org/downloads.html)
 - "timeout" command
+- curl extension for PHP
 
 ## Install
 
