@@ -6,7 +6,7 @@ $type = $_GET['type'];
 $timeout = $_GET['timeout'];
 $viewport = $_GET['viewport'];
 $js = $_GET['js'];
-$resizewidth = $_GET['resizewidth'];
+$resizewidth = $_GET['width'];
 $cache = $_GET['cache'];
 $onfail = rawurldecode($_GET['onfail']);
 
