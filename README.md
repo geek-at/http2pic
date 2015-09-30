@@ -7,22 +7,20 @@ Live demo on https://http2pic.haschek.at/
 
 ## Dependencies
 - [wkhtmltox](http://wkhtmltopdf.org/downloads.html)
-- "timeout" command
-- curl extension for PHP
+- curl extension for PHP ```apt-get install php5-curl```
+- Make sure the server has the "timeout" command ```apt-get install coreutils```
 
 ## Install
+- Download [this repo](https://github.com/chrisiaut/http2pic/archive/master.zip) and extract it somewhere on your webserver
 
 ### With WKHTMLToImage
 - Install [wkhtmltox](http://wkhtmltopdf.org/downloads.html) on your server
 - Make /usr/sbin/wkhtmltoimage executable for the user that runs the webserver. For Apache it's the ```www-data``` user. Or use sudo
 
 ### With PhantomJS
-
 - Install PhantomJS. eg via ```npm install -g phantomjs```
 - Make /usr/bin/phantomjs executable for the user that runs the webserver. For Apache it's the ```www-data``` user. Or use sudo
 
-- Make sure the server has the "timeout" command. For debian this is available via ```apt-get install coreutils```
-- Download [this repo](https://github.com/chrisiaut/http2pic/archive/master.zip) and extract it somewhere on your webserver
 
 ## Upgrade
 
