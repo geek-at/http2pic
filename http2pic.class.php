@@ -16,6 +16,9 @@
 // Stuff you can edit
 //
 
+// if true, will save all cmd queries
+define(DEBUG,false);
+
 define(MAXTIMEOUT,30);
 define(ONFAILIMAGE,'https://http2pic.haschek.at/img/failed.jpg');
 
@@ -157,6 +160,12 @@ class http2pic
 		$this->params['cmd'] = $cmd;
 		
 		$this->postRender();
+		if(DEBUG)
+		{
+			$fp = fopen('debug.log', 'a');
+			fwrite($fp, $cmd."\n");
+			fclose($fp);
+		}
 		return $cmd;
 	}
 	
@@ -195,6 +204,13 @@ class http2pic
 		$this->params['cmd'] = $cmd;
 		
 		$this->postRender();
+
+		if(DEBUG)
+		{
+			$fp = fopen('debug.log', 'a');
+			fwrite($fp, $cmd."\n");
+			fclose($fp);
+		}
 		return $cmd;
 	}
 	
@@ -268,7 +284,7 @@ class http2pic
 		curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	
-		if($code == 200)
+		if($code < 400) //status code updated so redirects will also work
 			$status = true;
 		else
 			$status = false;
