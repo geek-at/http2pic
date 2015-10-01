@@ -3,7 +3,7 @@ $(function() {
 	{
 		$("#showcase_button").attr("disabled","true");
 		var urlenc = encodeURIComponent(url);
-		var imageURL = "api.php?js=no&token=0e316498db6211f940951e"+(urlenc)+"8be8cdf7089770&type=$type&viewport=1200x330&url="+urlenc;
+		var imageURL = "api.php?js=no&cache=1&viewport=1200x330&url="+urlenc;
 		//$("#intro-header").css('background-image', 'url(\'/img/loading.gif\')');
 		
 		$("#loading").show();
