@@ -13,7 +13,6 @@ var js = input[4];
 var pageWidth = (vp_w!="")?parseInt(vp_w, 10):1024;
 var pageHeight = (vp_h!="")?parseInt(vp_h, 10):'auto';
 page.viewportSize = { width: pageWidth, height: pageHeight };
-page.clipRect = { top: 0, left: 0, width: pageWidth, height: pageHeight };
 page.settings['javascriptEnabled'] = (js=="no")?false:true;
 
     page.open(address, function (status) {

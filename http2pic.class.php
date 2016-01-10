@@ -146,7 +146,7 @@ class http2pic
 	function renderPagePHANTOMJS()
 	{
 		$cmd = 'timeout '.$this->params['timeout'].' '.PHANTOMJSPATH;
-		$cmd.= ' '.__DIR__.'/phantom.js ';
+		$cmd.= ' --ignore-ssl-errors=yes --ssl-protocol=any '.__DIR__.'/phantom.js ';
 		
 		$cmd.= ($this->params['url']);
 		$cmd.= ','.($this->params['file']);
@@ -279,7 +279,7 @@ class http2pic
 	function isURLReachable($url)
 	{
 		$ch = curl_init($url);    
-		curl_setopt($ch, CURLOPT_NOBODY, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);		
 		curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	
