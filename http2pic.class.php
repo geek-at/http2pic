@@ -155,7 +155,6 @@ class http2pic
 		$cmd.= ','.$this->params['js'];
 		
 		$cmd = escapeshellcmd($cmd);
-		exit($cmd);
 		shell_exec($cmd);
 		$this->params['cmd'] = $cmd;
 		
