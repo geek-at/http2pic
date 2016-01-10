@@ -63,7 +63,8 @@ class http2pic
 		switch($this->params['type'])
 		{
 			case 'png': $this->params['type'] = 'png'; break;
-			default: $this->params['type'] = 'jpg';
+			case 'jpg': $this->params['type'] = 'jpg'; break;			
+			default: $this->params['type'] = 'png';
 		}
 		
 		//validate timeout
