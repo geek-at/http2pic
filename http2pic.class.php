@@ -146,7 +146,7 @@ class http2pic
 	function renderPagePHANTOMJS()
 	{
 		$cmd = 'timeout '.$this->params['timeout'].' '.PHANTOMJSPATH;
-		$cmd.= ' '.__DIR__.'/phantom.js ';
+		$cmd.= ' --ignore-ssl-errors=yes '.__DIR__.'/phantom.js ';
 		
 		$cmd.= ($this->params['url']);
 		$cmd.= ','.($this->params['file']);
