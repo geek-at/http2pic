@@ -231,11 +231,13 @@ class http2pic
 		if ($this->params['type'] === 'png') {
 			
 			header('Content-Type: image/png');
+			header('Content-Disposition: inline; filename="'.$this->trimToAlphaNumeric($this->params['url']).'.png"');
 			$result = imagecreatefrompng($this->params['file']);
 			imagepng($result, NULL, 9);
 		}
 		else {
 			header('Content-Type: image/jpeg');
+			header('Content-Disposition: inline; filename="'.$this->trimToAlphaNumeric($this->params['url']).'.jpg"');
 			$result = imagecreatefromjpeg($this->params['file']);
 			imagejpeg($result, NULL, 100);
 		}
