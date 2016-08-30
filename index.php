@@ -124,9 +124,14 @@ define('CONN', (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "")?'http':'ht
                                 <td>onfail</td>
                                 <td>[url of .jpg]</td>
                                 <td>If the page can't be reached, this image will be displayed instead</td>
-                                <td><?php echo CONN; ?>://<?php echo DOMAIN; ?>/img/failed.jpg</td>
+                                <td><?php echo CONN; ?>://<?php echo DOMAIN; ?>/img/pagefailed.jpg</td>
                             </tr>
-                            
+                            <tr>
+                                <td>ondomainfail</td>
+                                <td>[url of .jpg]</td>
+                                <td>If the web server can't be reached, this image will be displayed instead</td>
+                                <td><?php echo CONN; ?>://<?php echo DOMAIN; ?>/img/domainfailed.jpg</td>
+                            </tr>
                             <tr>
                                 <td>cache</td>
                                 <td>[any alphanumeric string]</td>

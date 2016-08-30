@@ -20,7 +20,8 @@
 define(DEBUG,false);
 
 define(MAXTIMEOUT,30);
-define(ONFAILIMAGE,'https://http2pic.haschek.at/img/failed.jpg');
+define(ONFAILIMAGE, __DIR__.'/img/pagefailed.jpg');
+define(ONDOMAINFAILIMAGE, __DIR__.'/img/domainfailed.jpg');
 
 //rendering engine: wkhtmltoimage or phantomjs
 define(RENDERINGENGINE,'wkhtmltoimage');
@@ -94,6 +95,11 @@ class http2pic
 			$this->params['onfail'] = ONFAILIMAGE;
 		else
 			$this->params['onfail'] = rawurldecode($this->params['onfail']);
+		
+		if(!$this->params['ondomainfail'])
+			$this->params['ondomainfail'] = ONDOMAINFAILIMAGE;
+		else
+			$this->params['ondomainfail'] = rawurldecode($this->params['ondomainfail']);
 			
 	
 		//validate URL and check if exists
@@ -103,10 +109,20 @@ class http2pic
 			$this->params['url'] = rawurldecode($_GET['url']);
 		
 			//if the url is not valid or not responding, show onfail image and leave
-		if(!$this->isURLValid($this->params['url']) || !$this->isURLReachable($this->params['url']))
+		if(!$this->isURLValid($this->params['url']) || !(($reachableResult = $this->isURLReachable($this->params['url'])) == 0))
 		{
 			header('Content-Type: image/jpeg');
-			$result = imagecreatefromjpeg($this->params['onfail']);
+			header('Content-Disposition: inline; filename="http2png.jpg"');
+			switch ($reachableResult) {
+				case 1:
+					header('HTTP/1.0 404 File Not Found');
+					$result = imagecreatefromjpeg($this->params['onfail']);
+					break;
+				case 2:
+					header('HTTP/1.0 404 Server Not Found');
+					$result = imagecreatefromjpeg($this->params['ondomainfail']);
+					break;
+			}
 			imagejpeg($result, NULL, 100);
 			return false;
 		}
@@ -283,16 +299,22 @@ class http2pic
 	{
 		$ch = curl_init($url);    
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);		
-		curl_exec($ch);
-		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	
-		if($code < 400) //status code updated so redirects will also work
-			$status = true;
-		else
-			$status = false;
-			
-		curl_close($ch);
-		return $status;
+		if(curl_exec($ch) != false){
+			//We were able to connect to a webserver, what did it return?
+			$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		
+			if($code < 400) //status code updated so redirects will also work
+				$status = 0;
+			else
+				$status = 1;
+			curl_close($ch);
+			return $status;
+		} else {
+			//We were not able to connect to any webserver so we didn't get a status code
+			//to compare against. There must be a problem with the domain that was supplied.
+			curl_close($ch);
+			return 2;
+		}
 	}
 	
 	function trimToAlphaNumeric($string)
