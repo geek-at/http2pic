@@ -30,7 +30,7 @@ define(RENDERINGENGINE,'wkhtmltoimage');
 define(WKHTMLTOIMAGEPATH,'/usr/sbin/wkhtmltoimage');
 
 //location of phantomJS
-define(PHANTOMJSPATH,'/usr/bin/phantomjs');
+define(PHANTOMJSPATH,__DIR__.'/phantomjs');
 
 //where shoud we store cached images
 define(CACHEDIR,__DIR__.'/cache/');
@@ -289,8 +289,16 @@ class http2pic
 	
 	function isURLValid($url)
 	{
+		if(!$this->startsWith($url,'http://') && !$this->startsWith($url,'https://') && !$this->startsWith($url,'ftp://'))
+			return false;
 		return filter_var($url, FILTER_VALIDATE_URL);
 	}
+
+	function startsWith($haystack,$needle)
+{
+    $length = strlen($needle);
+    return (substr($haystack,0,$length) === $needle);
+}
 	
 	/**
 	* https://stackoverflow.com/questions/7684771/how-check-if-file-exists-from-the-url
