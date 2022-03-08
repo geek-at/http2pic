@@ -10,7 +10,7 @@ $resizewidth = $_GET['width'];
 $cache = $_GET['cache'];
 $onfail = rawurldecode($_GET['onfail']);
 
-$params = array('url'=>$url,
+$params = array('url'=>trim($url),
 				'type'=>$type,
 				'timeout'=>$timeout,
 				'viewport'=>$viewport,

@@ -210,7 +210,7 @@ class http2pic
 			$cmd.=' -f png';
 		
 		//add url to cmd
-		$cmd.=' '.escapeshellarg($this->params['url']);
+		$cmd.=' \''.addslashes($this->params['url']).'\'';
 		
 		//add storage path to cmd
 		$cmd.=' '.escapeshellarg($this->params['file']);
