@@ -1,0 +1,24 @@
+#showcase_url
+{
+	color:black;
+}
+
+#showcase_button
+{
+	color:black;
+}
+
+#loading
+{
+	display:none;
+}
+
+#preloader
+{
+	display:none;
+}
+
+a img:hover, a img:focus
+{
+	cursor: pointer;
+}
