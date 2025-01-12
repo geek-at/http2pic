@@ -1,5 +1,5 @@
-:80 {
-    root * /srv/web
+:8080 {
+    root * xxxxxxxxxx
     php_fastcgi 127.0.0.1:9000
     file_server
 

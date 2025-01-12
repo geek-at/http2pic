@@ -27,7 +27,7 @@ define('ONDOMAINFAILIMAGE', __DIR__.'/img/domainfailed.jpg');
 define('RENDERINGENGINE','wkhtmltoimage');
 
 //location of wkhtmltoimage
-define('WKHTMLTOIMAGEPATH','/usr/sbin/wkhtmltoimage');
+define('WKHTMLTOIMAGEPATH','wkhtmltoimage');
 
 //location of phantomJS
 define('PHANTOMJSPATH',__DIR__.'/phantomjs');
@@ -143,46 +143,7 @@ class http2pic
 	
 	function render()
 	{
-		//if phantomjs is selected and installed
-		if(RENDERINGENGINE=='phantomjs' && file_exists(PHANTOMJSPATH))
-			return $this->renderPagePHANTOMJS();
-		
-		//no? well ok how about WKHTMLToImage?
-		else if(RENDERINGENGINE=='wkhtmltoimage' && file_exists(WKHTMLTOIMAGEPATH))
-			return $this->renderPageWKHTMLTOIMAGE();
-			
-		//you're fucked
-		else
-			throw new Exception('No valid rendering engine found');
-	}
-	
-	
-	/**
-	* Render using PhantomJS
-	**/
-	function renderPagePHANTOMJS()
-	{
-		$cmd = 'timeout '.$this->params['timeout'].' '.PHANTOMJSPATH;
-		$cmd.= ' --ignore-ssl-errors=yes --ssl-protocol=any '.__DIR__.'/phantom.js ';
-		
-		$cmd.= ($this->params['url']);
-		$cmd.= ','.($this->params['file']);
-		$cmd.= ','.$this->params['vp_w'];
-		$cmd.= ','.$this->params['vp_h'];
-		$cmd.= ','.$this->params['js'];
-		
-		$cmd = escapeshellcmd($cmd);
-		shell_exec($cmd);
-		$this->params['cmd'] = $cmd;
-		
-		$this->postRender();
-		if(DEBUG)
-		{
-			$fp = fopen('debug.log', 'a');
-			fwrite($fp, $cmd."\n");
-			fclose($fp);
-		}
-		return $cmd;
+		return $this->renderPageWKHTMLTOIMAGE();
 	}
 	
 	/**
@@ -214,6 +175,10 @@ class http2pic
 		
 		//add storage path to cmd
 		$cmd.=' '.escapeshellarg($this->params['file']);
+
+		$cmd.=' --wait-for-network-idle';
+
+		var_dump($cmd);
 			
 		$cmd = escapeshellcmd($cmd);
 		shell_exec($cmd);
@@ -241,7 +206,8 @@ class http2pic
 		// resize if necessary
 		if($this->params['resizewidth'])
 			$this->resizeImage($this->params['file']);
-		
+
+		if(!file_exists($this->params['file'])) exit("Error: File not found");
 		
 		//print image to user
 		if ($this->params['type'] === 'png') {

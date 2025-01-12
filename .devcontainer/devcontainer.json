@@ -1,0 +1,35 @@
+{
+    "name": "Web Project Dev Container",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
+    "forwardPorts": [8080],
+    "postCreateCommand": "/start.sh",
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "terminal.integrated.shell.linux": "/bin/ash",
+          "php.validate.executablePath": "/usr/bin/php",
+          "php.debug.listenPort": 9003,
+          "php.debug.log": true
+        },
+        "extensions": [
+          "ms-azuretools.vscode-docker",
+          "felixfbecker.php-debug",
+          "bmewburn.vscode-intelephense-client",
+          "otovo-oss.htmx-tags",
+          "devsense.phptools-vscode",
+          "bmewburn.vscode-intelephense-client",
+          "github.copilot",
+          "github.copilot-chat",
+          "anbuselvanrocky.bootstrap5-vscode",
+          "hansuxdev.bootstrap5-snippets",
+          "alefragnani.Bookmarks",
+          "eamodio.gitlens"
+        ]
+      }
+    },
+    "remoteUser": "root"
+  }
+  

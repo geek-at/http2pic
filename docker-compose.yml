@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  http2pic:
+    image: ghcr.io/hascheksolutions/http2pic:2
+    restart: unless-stopped
+
+    environment:
+      - URL=http://localhost:8080
+    ports:
+      - 8080:80
