@@ -14,7 +14,8 @@ cd ${WORKSPACE_PATH}/src
 composer install
 
 echo ' [+] Starting Chrome'
-chromedriver --port=4444 &
+cd /tmp
+nohup chromedriver --port=4444 &
 
 
 chmod 777 ${WORKSPACE_PATH}/cache

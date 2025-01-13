@@ -21,7 +21,7 @@ switch($url[0])
 {
     case 'api':
         $target = substr($_SERVER['REQUEST_URI'],5);
-        if(!$target)
+        if(!$target || !filter_var($target, FILTER_VALIDATE_URL))
             $target = $_REQUEST['url'];
         $viewport = $_REQUEST['viewport'];
         $js = $_REQUEST['js']=='false'?false:true;

@@ -3,7 +3,8 @@ $(function() {
 	{
 		$("#showcase_button").attr("disabled","true");
 		var urlenc = encodeURIComponent(url);
-		var imageURL = "api.php?js=no&cache=1&viewport=1200x330&url="+urlenc;
+		var host = location.protocol + '//' + location.host;
+		var imageURL = host+"/api/?js=false&viewport=1200x330&url="+urlenc;
 		//$("#intro-header").css('background-image', 'url(\'/img/loading.gif\')');
 		
 		$("#loading").show();
