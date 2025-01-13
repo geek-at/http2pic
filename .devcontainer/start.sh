@@ -20,4 +20,4 @@ chromedriver --port=4444 &
 chmod 777 ${WORKSPACE_PATH}/cache
 chmod 777 ${WORKSPACE_PATH}/logs
 
-caddy run --config /etc/caddy/Caddyfile
+caddy start --config /etc/caddy/Caddyfile

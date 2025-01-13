@@ -19,13 +19,12 @@ if(php_sapi_name()=='cli-server' && file_exists(ROOT.DS.'web'.DS.implode('/',$ur
 
 switch($url[0])
 {
-    case 'test':
-        $target = $_GET['url'];
-        $type = $_GET['type'];
-        $timeout = $_GET['timeout'];
-        $viewport = $_GET['viewport'];
-        $js = $_GET['js']=='false'?false:true;
-        $resizewidth = $_GET['width'];
+    case 'api':
+        $target = substr($_SERVER['REQUEST_URI'],5);
+        if(!$target)
+            $target = $_REQUEST['url'];
+        $viewport = $_REQUEST['viewport'];
+        $js = $_REQUEST['js']=='false'?false:true;
 
         $serverUrl = 'http://localhost:4444';
         $options = new \Facebook\WebDriver\Chrome\ChromeOptions();
@@ -37,8 +36,6 @@ switch($url[0])
         //disable javascript if $js is false
         if(!$js)
             $capabilities->setCapability('javascriptEnabled', false);
-        
-        
 
         $driver = RemoteWebDriver::create($serverUrl, $capabilities);
 
@@ -66,31 +63,6 @@ switch($url[0])
         echo $driver->takeScreenshot();
 
     break;
-    case 'api':
-        $url = $_GET['url'];
-        $type = $_GET['type'];
-        $timeout = $_GET['timeout'];
-        $viewport = $_GET['viewport'];
-        $js = $_GET['js'];
-        $resizewidth = $_GET['width'];
-            $cache = $_GET['cache'];
-            $onfail = rawurldecode($_GET['onfail']);
-
-            $params = array('url'=>trim($url),
-                            'type'=>$type,
-                            'timeout'=>$timeout,
-                            'viewport'=>$viewport,
-                            'js'=>$js,
-                            'resizewidth'=>$resizewidth,
-                            'cache'=>$cache,
-                            'onfail'=>$onfail);
-
-            $http2pic = new http2pic($params);
-        
-        break;
-    case 'img':
-        
-        break;
     default:
         echo renderTemplate('index.html.php');
         break;
