@@ -3,5 +3,10 @@
     php_fastcgi 127.0.0.1:9000
     file_server
 
+    log {
+        output file /srv/logs/web.error.log
+        level ERROR
+    }
+
     try_files {path} {path}/ /index.php?{query}
 }

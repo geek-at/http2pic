@@ -1,6 +1,6 @@
 
 echo ' [+] Starting php'
-php-fpm83
+php-fpm84
 
 cd /srv/src
 composer install

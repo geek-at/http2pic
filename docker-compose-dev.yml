@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  http2pic:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      
+    restart: unless-stopped
+    volumes:
+      - ./cache:/srv/cache
+      - ./src:/srv/src
+      - ./web:/srv/web
+      - ./logs:/srv/logs
+
+    environment:
+      - URL=http://localhost:8080
+    ports:
+      - 8080:80

@@ -23,6 +23,12 @@ switch($url[0])
         $target = substr($_SERVER['REQUEST_URI'],5);
         if(!$target || !filter_var($target, FILTER_VALIDATE_URL))
             $target = $_REQUEST['url'];
+        if(!filter_var($target, FILTER_VALIDATE_URL))
+        {
+            header('HTTP/1.0 400 Bad Request');
+            echo 'Invalid URL';
+            exit;
+        }
         $viewport = $_REQUEST['viewport'];
         $js = $_REQUEST['js']=='false'?false:true;
 

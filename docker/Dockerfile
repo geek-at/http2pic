@@ -1,14 +1,16 @@
 FROM alpine:3.21
 
 # Install PHP and necessary extensions
-RUN apk add --no-cache curl php83 php83-fpm php83-opcache caddy php83-curl php83-xdebug chromium-chromedriver
+RUN apk add --no-cache curl php84 php84-fpm php84-opcache caddy php84-curl php84-xdebug chromium-chromedriver
 
-RUN sed -i 's/nobody/caddy/g' /etc/php83/php-fpm.d/www.conf
-RUN sed -i 's/E_ALL \& ~E_DEPRECATED \& ~E_STRICT/E_ALL \& ~E_DEPRECATED \& ~E_STRICT \& ~E_NOTICE \& ~E_WARNING/g' /etc/php83/php.ini
+RUN sed -i 's/nobody/caddy/g' /etc/php84/php-fpm.d/www.conf
+RUN sed -i 's/E_ALL \& ~E_DEPRECATED \& ~E_STRICT/E_ALL \& ~E_DEPRECATED \& ~E_STRICT \& ~E_NOTICE \& ~E_WARNING/g' /etc/php84/php.ini
+# log php errors to /srv/logs/php_errors.log
+RUN echo "error_log = /srv/logs/php_errors.log" >> /etc/php84/php.ini
 
 # Install additional PHP extensions
-RUN apk add --no-cache php83-ctype php83-dom php83-fileinfo php83-gd php83-iconv php83-simplexml php83-xml php83-xmlreader php83-xmlwriter php83-zip php83-phar php83-openssl
-RUN curl -sS https://getcomposer.org/installer | /usr/bin/php83 -- --install-dir=/usr/bin --filename=composer
+RUN apk add --no-cache php84-ctype php84-dom php84-fileinfo php84-gd php84-iconv php84-simplexml php84-xml php84-xmlreader php84-xmlwriter php84-zip php84-phar php84-openssl
+RUN curl -sS https://getcomposer.org/installer | /usr/bin/php84 -- --install-dir=/usr/bin --filename=composer
 
 ADD docker/start.sh /start.sh
 RUN chmod +x /start.sh
